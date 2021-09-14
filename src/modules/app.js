@@ -1,13 +1,25 @@
 import { DonateForm } from "./donate-form";
 import { DonateList } from "./donate-list";
+import * as  formattingFunctions  from "../core/utils/index";
+
+const mockDonates = [
+  { amount: 4, date: new Date() },
+  { amount: 20, date: new Date() },
+  { amount: 3, date: new Date() },
+  { amount: 1, date: new Date() },
+];
+const amountsMockDonates = [];
+mockDonates.map((element) => {
+  amountsMockDonates.push(element.amount);
+});
 
 export default class App {
   #donateBlock;
   #donateList;
   constructor() {
     this.state = {
-      donates: [],
-      totalAmount: 0,
+      donates: [...mockDonates],
+      totalAmount: formattingFunctions.calculateSumOfNumbers(amountsMockDonates),
     };
 
     this.#donateBlock = new DonateForm(

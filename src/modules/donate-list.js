@@ -1,3 +1,6 @@
+import { Settings as Set } from "../core/constants/settings";
+import * as formattingFunctions from "../core/utils/index";
+
 export class DonateList {
   constructor(donates) {
     this.donates = donates;
@@ -17,9 +20,11 @@ export class DonateList {
     donates.map((donate) => {
       const donateItem = document.createElement("div");
       donateItem.className = "donate-item";
-      donateItem.textContent = `${donate.date}  -   `;
+      donateItem.textContent = `${formattingFunctions.getFormattedTime(
+        donate.date
+      )}  -   `;
       const amountDonateItem = document.createElement("b");
-      amountDonateItem.textContent = donate.amount;
+      amountDonateItem.textContent = `${donate.amount}${Set.currency}`;
       donateItem.append(amountDonateItem);
       this.donatesList.append(donateItem);
     });
